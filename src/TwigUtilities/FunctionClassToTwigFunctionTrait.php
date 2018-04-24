@@ -7,7 +7,7 @@ use \Twig_Filter;
 use \Twig_Function;
 
 /**
- * Trait to convert AbstractTwigFunctionClass classes to Twig functions.
+ * Trait to convert TwigFunctionClass classes to Twig functions.
  *
  * @author Kimmo Salmela <kimmo.salmela@reun.eu>
  */
@@ -15,7 +15,7 @@ trait FunctionClassToTwigFunctionTrait
 {
 
   /**
-   * Converts an AbstractTwigFunctionClass to Twig function or filter.
+   * Converts an TwigFunctionClass to Twig function or filter.
    *
    * @param string $classname Function class name.
    * @param string $type Function type. Either Twig_Function or Twig_Filter.
@@ -33,11 +33,11 @@ trait FunctionClassToTwigFunctionTrait
             throw new InvalidArgumentException($msg);
         }
 
-        if (!is_subclass_of($classname, AbstractTwigFunctionClass::class)) {
+        if (!is_subclass_of($classname, TwigFunctionClass::class)) {
             $msg = sprintf(
           "%s is not an instance of %s",
           $classname,
-        AbstractTwigFunctionClass::class
+        TwigFunctionClass::class
       );
             throw new InvalidArgumentException($msg);
         }
