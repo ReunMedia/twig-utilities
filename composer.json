@@ -1,0 +1,19 @@
+{
+    "name": "reun/twig-utilities",
+    "description": "Various Twig utilities and extensions",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kimmo Salmela",
+            "email": "cryszon@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.0",
+        "twig/twig": "^2.4"
+    },
+    "autoload": {
+        "psr-4": {"Reun\\TwigUtilities\\": "src/TwigUtilities"}
+    }
+}
