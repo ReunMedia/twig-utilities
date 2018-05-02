@@ -19,15 +19,17 @@ class FormatDateRange extends AbstractTwigFunction
    *
    * @param string $startdate
    * @param string $enddate
+   * @param string $includeYear Always include year in the returned date.
    * @return string
    */
-    public function __invoke($startdate, $enddate)
+    public function __invoke($startdate, $enddate, $includeYear = false)
     {
         $startdate = new DateTime($startdate);
         $enddate = new DateTime($enddate);
 
         if ($startdate->format("Ymd") === $enddate->format("Ymd")) {
-            return $startdate->format("j.n");
+            $format = $includeYear ? "j.n.Y" : "j.n";
+            return $startdate->format($format);
         }
 
         $startArr = date_parse($startdate->format(DateTime::ATOM));
@@ -41,8 +43,9 @@ class FormatDateRange extends AbstractTwigFunction
         if ($startArr["year"] !== $endArr["year"]) {
             $startStr .= "{$startArr['year']}";
         }
-
-        $endStr = $enddate->format("j.n");
+        
+        $format = $includeYear ? "j.n.Y" : "j.n";
+        $endStr = $enddate->format($format);
         return "$startStr-$endStr";
     }
 }
