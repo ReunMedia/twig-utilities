@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.4.0 - 2018-10-15
+### New features
+#### FormatDateRange
+- Now accepts `DateTime` objects in addition to strings.
+- Can now specify a custom delimiter string (default `-`)
+
 ## v0.3.0 - 2018-05-02
 ### New features
 - `FormatDateRange`: Option to always include year in the returned date.

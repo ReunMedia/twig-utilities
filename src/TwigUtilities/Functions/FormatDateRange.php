@@ -17,15 +17,19 @@ class FormatDateRange extends AbstractTwigFunction
    * Formats two datetime strings according to finnish date conventions.
    * If startdate and enddate are equal only start date is returned.
    *
-   * @param string $startdate
-   * @param string $enddate
-   * @param string $includeYear Always include year in the returned date.
+   * Copied from Vaho project
+   *
+   * @param string|int|DateTime $startdate
+   * @param string|int|DateTime $enddate
+   * @param bool $includeYear Always include year in the returned date even if
+   * the start and end date are on the same year.
+   * @param string $delimiter Delimiter string between dates.
    * @return string
    */
-    public function __invoke($startdate, $enddate, $includeYear = false)
+    public function __invoke($startdate, $enddate, bool $includeYear = false, string $delimiter = "-")
     {
-        $startdate = new DateTime($startdate);
-        $enddate = new DateTime($enddate);
+        $startdate = ($startdate instanceof DateTime) ? $startdate : new DateTime($startdate);
+        $enddate = ($enddate instanceof DateTime) ? $enddate : new DateTime($enddate);
 
         if ($startdate->format("Ymd") === $enddate->format("Ymd")) {
             $format = $includeYear ? "j.n.Y" : "j.n";
@@ -46,6 +50,6 @@ class FormatDateRange extends AbstractTwigFunction
         
         $format = $includeYear ? "j.n.Y" : "j.n";
         $endStr = $enddate->format($format);
-        return "$startStr-$endStr";
+        return "$startStr$delimiter$endStr";
     }
 }
