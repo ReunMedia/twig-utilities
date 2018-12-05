@@ -1,5 +1,16 @@
 # Changelog
 
+## v0.5.0 - 2018-12-05
+### Breaking changes
+Pretty much everything has changed. Backwards incompatible with previous
+version. Repository got messed up. Had to rebase. Previous versions might not
+be available anymore (missing tags).
+
+### New features
+- Slim component with various Slim Twig integration helpers.
+- New filters: HtmlPurify, RemoveEmpty.
+- Refactor TwigExtension
+
 ## v0.4.0 - 2018-10-15
 ### New features
 #### FormatDateRange
