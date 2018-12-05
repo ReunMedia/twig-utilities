@@ -8,7 +8,7 @@ namespace Reun\TwigUtilities;
  *
  * @author Kimmo Salmela <kimmo.salmela@reun.eu>
  */
-abstract class TwigFunctionClass
+abstract class AbstractTwigFunction
 {
 
   /**

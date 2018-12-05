@@ -15,5 +15,11 @@
     },
     "autoload": {
         "psr-4": {"Reun\\TwigUtilities\\": "src/TwigUtilities"}
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.4"
+    },
+    "scripts": {
+      "test": "phpunit --bootstrap vendor/autoload.php tests/phpunit"
     }
 }

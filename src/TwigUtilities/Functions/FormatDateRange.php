@@ -2,22 +2,20 @@
 
 namespace Reun\TwigUtilities\Functions;
 
-use \DateTime;
-use \Reun\TwigUtilities\TwigFunctionClass;
+use DateTime;
+use Reun\TwigUtilities\AbstractTwigFunction;
 
 /**
  * Format two datetime strings.
  *
  * @author Kimmo Salmela <kimmo.salmela@reun.eu>
  */
-class FormatDateRange extends TwigFunctionClass
+class FormatDateRange extends AbstractTwigFunction
 {
 
   /**
    * Formats two datetime strings according to finnish date conventions.
    * If startdate and enddate are equal only start date is returned.
-   *
-   * Copied from Vaho project
    *
    * @param string $startdate
    * @param string $enddate

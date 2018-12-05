@@ -1,2 +1,7 @@
 /_*
-/vendor/
+/.vscode
+/nbproject
+/node_modules
+/vendor
+*.log
+**/_temp/**
