@@ -45,7 +45,7 @@ class DynamicTwigPage extends AbstractTwigPage
    * @param string $pagesPrefix Path prefix to Twig pages. Defaults to `@pages`
    * Twig namespace which allows you to define the path in Twig configuration.
    */
-  public function __construct(Environment $twig, $pagesPrefix = "@pages")
+  public function __construct(\Twig_Environment $twig, $pagesPrefix = "@pages")
   {
     parent::__construct($twig);
     $this->pagesPrefix = $pagesPrefix;

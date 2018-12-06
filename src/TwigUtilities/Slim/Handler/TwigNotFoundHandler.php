@@ -20,7 +20,7 @@ class TwigNotFoundHandler extends AbstractTwigPage
    */
   private $template;
 
-  public function __construct(Environment $twig, $template)
+  public function __construct(\Twig_Environment $twig, $template)
   {
     parent::__construct($twig);
     $this->template = $template;

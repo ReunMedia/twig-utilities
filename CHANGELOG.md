@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.5.1 - 2018-12-06
+This release introduces a temporary fix for Slim component not working with
+PHP-DI.
+
+Currently PHP-DI doesn't support `class_alias()`, which means that
+`Twig_Environment` gets injected instead of `Twig\Environment`. To fix this all
+classes depending on `Twig\Environment` have been changed to use
+`Twig_Environment` instead. They might be changed back in the future once PHP-DI
+gets fixed. See http://bit.ly/2SsA5Rh for the issue.
+
 ## v0.5.0 - 2018-12-05
 ### Breaking changes
 Pretty much everything has changed. Backwards incompatible with previous
