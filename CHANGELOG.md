@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.5.3 - 2018-12-06
+### Bugfixes
+- Fix case sensitivity bug by renaming `HtmlPurify.php` to `Htmlpurify.php`.
+
 ## v0.5.2 - 2018-12-06
 ### Bugfixes
 - Fix `TwigNotFoundHandler`
