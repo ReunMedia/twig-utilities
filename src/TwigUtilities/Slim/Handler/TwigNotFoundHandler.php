@@ -26,14 +26,14 @@ class TwigNotFoundHandler extends AbstractTwigPage
     $this->template = $template;
   }
 
-  public function getTemplate()
+  public function getTemplate(): string
   {
     return $this->template;
   }
 
   public function __invoke(ServerRequestInterface $request, ResponseInterface $response)
   {
-    $response = parent::invoke($request, $response);
+    $response = parent::__invoke($request, $response, []);
     $response = $response->withStatus(404)->withHeader("Content-Type", "text/html");
     return $response;
   }

@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.5.2 - 2018-12-06
+### Bugfixes
+- Fix `TwigNotFoundHandler`
+
 ## v0.5.1 - 2018-12-06
 This release introduces a temporary fix for Slim component not working with
 PHP-DI.
