@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.6.0 - 2019-01-07
+### New features
+- `CopyrightYear` function.
+
 ## v0.5.3 - 2018-12-06
 ### Bugfixes
 - Fix case sensitivity bug by renaming `HtmlPurify.php` to `Htmlpurify.php`.
