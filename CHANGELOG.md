@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.7.0 - 2019-02-13
+### New features
+- Add PHP Debug Bar extension.
+
 ## v0.6.0 - 2019-01-07
 ### New features
 - `CopyrightYear` function.
