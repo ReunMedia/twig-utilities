@@ -19,7 +19,7 @@ Then render the assets
 // head.twig
 {% if phpDebugBar.enabled %}
   <style>{{phpDebugBar.css|raw}}</style>
-  <style>{{phpDebugBar.head|raw}}</style>
+  {{phpDebugBar.head|raw}}
 {% endif %}
 
 // scripts.twig
