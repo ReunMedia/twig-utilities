@@ -11,7 +11,7 @@
     ],
     "require": {
         "php": "^7.1",
-        "twig/twig": "^2.4"
+        "twig/twig": "^3.0",
     },
     "autoload": {
         "psr-4": {"Reun\\TwigUtilities\\": "src/TwigUtilities"}

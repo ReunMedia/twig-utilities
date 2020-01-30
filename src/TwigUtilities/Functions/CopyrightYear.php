@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace Reun\TwigUtilities\Functions;
 
-use Reun\TwigUtilities\AbstractTwigFunction;
-
-class CopyrightYear extends AbstractTwigFunction
+class CopyrightYear extends AbstractFunction
 {
-
-  public function __invoke($fromYear)
+  /**
+   * @param int|string $fromYear starting year
+   */
+  public function __invoke($fromYear): string
   {
-    $startY = \DateTime::createFromFormat("Y", "$fromYear")->format("Y");
+    $startY = \DateTime::createFromFormat("Y", "{$fromYear}")->format("Y");
     $endY = date("Y");
-    return ($startY >= $endY) ? $startY : "$startY-$endY";
+
+    return ($startY >= $endY) ? $startY : "{$startY}-{$endY}";
   }
 }
