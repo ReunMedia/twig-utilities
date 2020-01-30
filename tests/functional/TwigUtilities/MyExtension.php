@@ -10,14 +10,14 @@ use Twig\Extension\AbstractExtension;
 
 class MyExtension extends AbstractExtension
 {
-  public function getFilters()
+  public function getFilters(): array
   {
     return [
       Strftime::getFilter(),
     ];
   }
 
-  public function getFunctions()
+  public function getFunctions(): array
   {
     return [
       CopyrightYear::getFunction(),

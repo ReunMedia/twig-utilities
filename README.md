@@ -1,61 +1,73 @@
 # Twig utilities
-This library contains various utilities and components for Twig.
 
-## Functions / Filters
-Contain various Twig functions and filters to use with `ClassExtension`.
+Various utility filters, functions and Slim integration for Twig.
 
-## ClassExtension
-The ClassExtension component provides a way to define Twig filters and functions
-as classes. They are registered when the extension is initialized.
+## Installation
 
-### Creating a function (or a filter)
-Extend `Reun\TwigUtilities\TwigUtilities\AbstractTwigFunction` and implement the
-logic in `__invoke()`. By default the function name is a "camelCased" version of
-the class name. Custom name can be specified by overriding `getName()`. Options
-can be specified by overriding `getOptions()`
-Example:
+```
+composer require reun/twig-utilities
+```
+
+## Usage - Filters and functions
+
+Functions and filters are defined in separate classes and provide either
+`getFilter()` or `getFunction()` static method that can be used to add them to
+Twig. The class name beginning with a lowercase character becomes the name of
+the filter/function in Twig. E.g. `CopyrightYear` becomes `copyrightYear()`.
+
+The recommended way is to create a new Twig extension for your project and add
+filters and functions in `getFilters()` and `getFunctions()`.
+
 ```php
-class Reverse extends AbstractTwigFunction
+use Reun\TwigUtilities\Filters\Strftime;
+use Reun\TwigUtilities\Functions\CopyrightYear;
+use Twig\Extension\AbstractExtension;
+
+class MyExtension extends AbstractExtension
 {
-  public function getOptions()
+  public function getFilters(): array
   {
-    return ["is_safe" => ["html"]];
+    return [
+      Strftime::getFilter(),
+    ]
   }
 
-  public function __invoke($text)
+  public function getFunctions(): array
   {
-    return strrev($text);
+    return [
+      CopyrightYear::getFunction(),
+    ]
   }
 }
+
+// Add extension to Twig.
+$twig->addExtension(new MyExtension());
 ```
 
-### Using the extension
-Filters and functions are registered to the extension during instantiation. In
-order for extension to find the function classes the
-`Twig\ContainerRuntimeLoader` loader must also be added to Twig.
+Some filters and functions have external dependencies. To use them you must add
+a [runtime loader](https://twig.symfony.com/doc/3.x/advanced.html#definition-vs-runtime)
+to Twig environment.
 
 ```php
-$twig = new \Twig\Environment();
+use DI\Container;
+use Twig\RuntimeLoader\ContainerRuntimeLoader;
 
-// Register functions and filters and add the extension to Twig.
-$functions = [""];
-$filters = [Reverse::class];
-$myExtension = new ClassExtension($functions, $filters);
-$twig->addExtension($myExtension);
-
-// Add ContainerRuntimeLoader to allow the extension to load the classes.
-$twig->addRuntimeLoader(new \Twig\RuntimeLoader\ContainerRuntimeLoader());
+$twig->addRuntimeLoader(new ContainerRuntimeLoader(new Container()));
 ```
 
-To use other extension features, such as globals, simply extend `ClassExtension`
-with your own extension class.
+### Creating new filters and functions
 
+Just extend either `Reun\TwigUtilities\Filters\AbstractFilter` or
+`Reun\TwigUtilities\Functions\AbstractFunction` and implement `__invoke()`.
+Options can be specified by overriding `getOptions()` method.
 
-## Slim
+## Usage - Slim utilities
+
 The Slim component provides classes that help integrate Twig views into a Slim
 application.
 
 ### DynamicTwigPage
+
 `DynamicTwigPage` class allows you to easily combine Slim actions with specific
 Twig views with support for automatic template rendering based on the requested
 route.
@@ -63,6 +75,7 @@ route.
 To get started simply create a directory for your Twig templates with each page
 located in its own subdirectory and assign it to a Twig namespace. Then just
 register `DynamicTwigPage` as the catch-all Slim route action.
+
 ```
 view/public/pages/
   about/
@@ -79,19 +92,22 @@ $loader = new FileSystemLoader();
 // @pages namespace is used by default.
 $loader->addPath("view/public/pages", "pages");
 ```
+
 ```php
 // Slim routes
 $app->get("/{page}", DynamicTwigPage::class);
 ```
 
 `DynamicTwigPage` can be extended to provide custom data to templates.
+
 ```php
 class NewsAction extends DynamicTwigPage
 {
   private $newsManager;
 
-  public function __construct(NewsManager $newsManager)
+  public function __construct(NewsManager $newsManager, Environment $twig, string $pagesPrefix = "@pages")
   {
+    parent::__construct($twig, $pagesPrefix);
     $this->newsManager = $newsManager;
   }
 
@@ -103,6 +119,7 @@ class NewsAction extends DynamicTwigPage
   }
 }
 ```
+
 ```php
 // Slim routes
 $app->get("/news", NewsAction::class);
@@ -110,18 +127,42 @@ $app->get("/{page}", DynamicTwigPage::class);
 ```
 
 #### Handling Not Found errors
+
 In case a template is not found, a Twig `LoaderError` is thrown.
 `TwigLoaderError` middleware can be used to catch it and convert it to Slim's
-`NotFoundException` that will be handled by the framework. See [Rendering a 404
-page with Twig](#rendering-a-404-page-with-twig) on how to render a 404 page
+`NotFoundException` that will be handled by the framework. See [Rendering Slim
+errors with Twig](#rendering-slim-errors-with-twig) on how to render error pages
 with Twig.
+
 ```php
 $app->add(TwigLoaderError::class);
 ```
 
-### Rendering a 404 page with Twig
-You can use Twig to render a custom 404 error page by using
-`TwigNotFoundHandler`.
+### Rendering Slim errors with Twig
+
+You can use the `Reun\TwigUtilities\Slim\TwigErrorRenderer` class to with Slim
+to render error messages. See [Error Handling Middleware](http://www.slimframework.com/docs/v4/middleware/error-handling.html) in Slim documentation for more info.
+
 ```php
-$c["notFoundHandler"] = new TwigNotFoundHandler($twig, "view/404.twig");
+// definitions.php
+$c[TwigErrorRenderer::class] = function(Environment $twig) {
+  // Default template used for errors.
+  $defaultTemplate = "@pages/errors/default.twig";
+
+  // Templates for specific error types
+  $templates = [
+    HttpNotFoundException::class => "@pages/errors/notFound.twig",
+    HttpForbiddenException::class => "@pages/errors/forbidden.twig",
+  ];
+
+  return new TwigErrorRenderer($twig, $defaultTemplate, $templates);
+}
+
+// bootstrap.php
+$errorHandler->registerErrorRenderer("text/html", TwigErrorRenderer::class)
 ```
+
+## Development
+
+Run `composer functional-test-server` to start a test server. The code is
+located in `tests/functional/TwigUtilities`.

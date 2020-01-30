@@ -1,5 +1,22 @@
 # Changelog
 
+## v0.8.0 - 2020-01-30
+Multiple major breaking changes. See updated [README](README.md) for new usage
+instructions.
+
+### Breaking Changes
+- Requires PHP 7.4
+- Requires Twig 3.0
+- Requires Slim 4.0 for Slim related features
+- Removed `removeEmpty` filter. Use `|filter(v => v)` or define `array_filter`
+  as a filter in your extension instead.
+- Removed `PhpDebugBar` extension. Use a PSR middleware such as
+  `php-middleware/debugbar` or `middlewares/debugbar` instead.
+
+### Fixed
+- `FormatDateRange` now always displays a year on both dates if they are on a
+  different year.
+
 ## v0.7.0 - 2019-02-13
 ### New features
 - Add PHP Debug Bar extension.
