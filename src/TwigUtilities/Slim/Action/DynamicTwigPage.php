@@ -13,39 +13,41 @@ use Twig\Environment;
  */
 class DynamicTwigPage extends AbstractTwigPage
 {
-  /** @var string Pages directory path. */
-  private $pagesPrefix;
-
-  /** @var string Current request template path. */
-  private $template;
+  /**
+   * Pages directory path.
+   */
+  private string $pagesPrefix;
 
   /**
-   * @var string
+   * Current request template path.
+   */
+  private string $template;
+
+  /**
    * Current request data. Used by `getData()` to return dynamic data based on
    * the request.
-   **/
-  private $data = [];
+   */
+  private array $data = [];
 
   /**
-   * @var string
    * `page` argument of current request. Used for various dynamic properties.
    * NOTE - `/` is parsed as `$indexTemplate` by the request handler.
    */
-  private $pageArg;
+  private string $pageArg;
 
   /**
-   * @var string Name of the index template page. Used when the path is empty.
+   * Name of the index template page. Used when the path is empty.
    * Path access to the index template is blocked. This means that by default
    * `/index` path always returns 404 by this action.
    */
-  public $indexTemplate = "index";
+  public string $indexTemplate = "index";
 
   /**
-   * @param Environment $twig
    * @param string $pagesPrefix Path prefix to Twig pages. Defaults to `@pages`
-   * Twig namespace which allows you to define the path in Twig configuration.
+   *                            Twig namespace which allows you to define the
+   *                            path in Twig configuration.
    */
-  public function __construct(\Twig_Environment $twig, $pagesPrefix = "@pages")
+  public function __construct(Environment $twig, string $pagesPrefix = "@pages")
   {
     parent::__construct($twig);
     $this->pagesPrefix = $pagesPrefix;
@@ -74,7 +76,8 @@ class DynamicTwigPage extends AbstractTwigPage
   public function getTemplate(): string
   {
     $page = $this->getCurrentPageName();
-    return "$this->pagesPrefix/$page/$page.twig";
+
+    return "{$this->pagesPrefix}/{$page}/{$page}.twig";
   }
 
   /**
@@ -87,14 +90,16 @@ class DynamicTwigPage extends AbstractTwigPage
   {
     // Return some default dynamic data based on the current request.
     $page = $this->getCurrentPageName();
+
     return [
       "pageName" => $page,
     ];
   }
-  
-  public function __invoke(ServerRequestInterface $request, ResponseInterface $response, $args)
+
+  public function __invoke(ServerRequestInterface $request, ResponseInterface $response, $args): ResponseInterface
   {
     $this->pageArg = $args["page"] ?? "";
+
     return parent::__invoke($request, $response, $args);
   }
 }

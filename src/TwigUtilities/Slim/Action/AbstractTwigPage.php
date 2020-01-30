@@ -14,13 +14,9 @@ use Twig\Environment;
  */
 abstract class AbstractTwigPage
 {
+  protected Environment $twig;
 
-  /**
-   * @var \Environment
-   */
-  protected $twig;
-
-  public function __construct(\Twig_Environment $twig)
+  public function __construct(Environment $twig)
   {
     $this->twig = $twig;
   }
@@ -32,13 +28,13 @@ abstract class AbstractTwigPage
   {
     return [];
   }
-  
+
   /**
    * Returns path to Twig template.
    */
   abstract public function getTemplate(): string;
 
-  public function __invoke(ServerRequestInterface $request, ResponseInterface $response, $args)
+  public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
   {
     $data = $this->getData();
     $template = $this->getTemplate();

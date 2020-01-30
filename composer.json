@@ -12,6 +12,9 @@
     "require": {
         "php": "^7.1",
         "twig/twig": "^3.0",
+        "psr/http-server-middleware": "^1.0",
+        "psr/http-server-handler": "^1.0",
+        "psr/http-message": "^1.0"
     },
     "autoload": {
         "psr-4": {"Reun\\TwigUtilities\\": "src/TwigUtilities"}
@@ -26,5 +29,8 @@
     },
     "config": {
         "process-timeout": 0
+    },
+    "suggest": {
+      "slim/slim": "Slim Framework ^4.0 is required for Slim specific features"
     }
 }

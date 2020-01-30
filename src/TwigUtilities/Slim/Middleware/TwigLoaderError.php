@@ -4,23 +4,23 @@ declare(strict_types=1);
 
 namespace Reun\TwigUtilities\Slim\Middleware;
 
-use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Slim\Exception\NotFoundException;
+use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
+use Slim\Exception\HttpNotFoundException;
 use Twig\Error\LoaderError;
 
 /**
- * Catch Twig LoaderErrors and convert them to Slim NotFoundExceptions.
- * Use this middleware in production along with TwigNotFoundHandler.
+ * Catch Twig LoaderErrors and re-throw them as Slim's HttpNotFoundExceptions.
  */
-class TwigLoaderError
+class TwigLoaderError implements MiddlewareInterface
 {
-  public function __invoke(ServerRequestInterface $request, ResponseInterface $response, $next)
+  public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
   {
     try {
-      return $next($request, $response);
+      return $handler->handle($request);
     } catch (LoaderError $e) {
-      throw new NotFoundException($request, $response);
+      throw new HttpNotFoundException($request, null, $e);
     }
   }
 }
