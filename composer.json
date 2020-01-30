@@ -17,9 +17,14 @@
         "psr-4": {"Reun\\TwigUtilities\\": "src/TwigUtilities"}
     },
     "require-dev": {
-        "phpunit/phpunit": "^7.4"
+        "phpunit/phpunit": "^7.4",
+        "php-di/php-di": "^6.0"
     },
     "scripts": {
-      "test": "phpunit --bootstrap vendor/autoload.php tests/phpunit"
+        "test": "phpunit --bootstrap vendor/autoload.php tests/phpunit",
+        "functional-test-server": "php -S localhost:8080 -t tests/functional/TwigUtilities"
+    },
+    "config": {
+        "process-timeout": 0
     }
 }

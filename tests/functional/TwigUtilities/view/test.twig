@@ -1,0 +1,27 @@
+<h1>Twig Utilities Functional Test Page</h1>
+<h2>Filter tests</h2>
+<h3>strftime</h3>
+<p>
+	Today is
+	{{ "now"|strftime("%A")|lower }}
+</p>
+<hr>
+
+<h2>Function tests</h2>
+<h3>copyrightYear</h3>
+<p>Copyright &copy;
+	{{ copyrightYear(2012) }}
+</p>
+<hr>
+
+<h3>formatDateRange</h3>
+<p>
+  {{formatDateRange("today","today")}}<br>
+  {{formatDateRange("yesterday", "today")}}<br>
+  {{formatDateRange("last month", "today")}}<br>
+  {{formatDateRange("last year", "today")}}<br>
+  <br>
+  {{formatDateRange("today","today", true)}}<br>
+  {{formatDateRange("last month", "today", false, " <=> ")}}<br>
+</p>
+<hr>
