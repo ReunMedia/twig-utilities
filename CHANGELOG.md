@@ -12,6 +12,8 @@ instructions.
   as a filter in your extension instead.
 - Removed `PhpDebugBar` extension. Use a PSR middleware such as
   `php-middleware/debugbar` or `middlewares/debugbar` instead.
+- Removed `TwigLoaderError` middleware. `TwigLoaderErrorHandler` should be used
+  instead. Usage instructions are in [README](README.md#handling-not-found-errors).
 
 ### Fixed
 - `FormatDateRange` now always displays a year on both dates if they are on a

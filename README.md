@@ -129,13 +129,17 @@ $app->get("/{page}", DynamicTwigPage::class);
 #### Handling Not Found errors
 
 In case a template is not found, a Twig `LoaderError` is thrown.
-`TwigLoaderError` middleware can be used to catch it and convert it to Slim's
+`TwigLoaderErrorHandler` can be used to catch it and convert it to Slim's
 `NotFoundException` that will be handled by the framework. See [Rendering Slim
 errors with Twig](#rendering-slim-errors-with-twig) on how to render error pages
 with Twig.
 
 ```php
-$app->add(TwigLoaderError::class);
+use Reun\TwigUtilities\Slim\Error\TwigLoaderErrorHandler;
+use Twig\Error\LoaderError;
+
+$errorMiddleware = $app->addErrorMiddleware(true, true, true);
+$errorMiddleware->setErrorHandler(LoaderError::class, new TwigLoaderErrorHandler());
 ```
 
 ### Rendering Slim errors with Twig

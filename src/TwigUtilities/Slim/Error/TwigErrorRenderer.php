@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Reun\TwigUtilities\Slim;
+namespace Reun\TwigUtilities\Slim\Error;
 
 use Psr\Http\Message\ResponseFactoryInterface;
 use Slim\Interfaces\ErrorRendererInterface;
