@@ -6,6 +6,7 @@ namespace Reun\TwigUtilities\Slim\Error;
 
 use Psr\Http\Message\ResponseFactoryInterface;
 use Slim\Interfaces\ErrorRendererInterface;
+use Throwable;
 use Twig\Environment;
 
 /**
@@ -45,7 +46,7 @@ class TwigErrorRenderer implements ErrorRendererInterface
   public function __invoke(Throwable $exception, bool $displayErrorDetails): string
   {
     $template = $this->defaultTemplate;
-    foreach ($templates as $cls => $tpl) {
+    foreach ($this->templates as $cls => $tpl) {
       if (\is_subclass_of($exception, $cls)) {
         $template = $tpl;
       }
