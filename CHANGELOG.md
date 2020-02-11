@@ -1,13 +1,17 @@
 # Changelog
+All notable changes to this project will be documented in this file.
 
-## v0.8.0 - 2020-01-30
-Multiple major breaking changes. See updated [README](README.md) for new usage
-instructions.
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [0.8.0] - 2020-02-11
+This release introduces multiple major breaking changes. See updated
+[README](README.md) for new usage instructions.
 
 ### Breaking Changes
-- Requires PHP 7.4
-- Requires Twig 3.0
-- Requires Slim 4.0 for Slim related features
+- Requires PHP 7.4.
+- Requires Twig 3.0.
+- Requires Slim 4.0 for Slim related features.
 - Removed `removeEmpty` filter. Use `|filter(v => v)` or define `array_filter`
   as a filter in your extension instead.
 - Removed `PhpDebugBar` extension. Use a PSR middleware such as
@@ -15,27 +19,30 @@ instructions.
 - Removed `TwigLoaderError` middleware. `TwigLoaderErrorHandler` should be used
   instead. Usage instructions are in [README](README.md#handling-not-found-errors).
 
+### Changed
+- Use Reun Media dotfiles and other conventions from `generator-reun-webapp`.
+
 ### Fixed
 - `FormatDateRange` now always displays a year on both dates if they are on a
   different year.
 
-## v0.7.0 - 2019-02-13
-### New features
+## [0.7.0] - 2019-02-13
+### Added
 - Add PHP Debug Bar extension.
 
-## v0.6.0 - 2019-01-07
-### New features
+## [0.6.0] - 2019-01-07
+### Added
 - `CopyrightYear` function.
 
-## v0.5.3 - 2018-12-06
+## [0.5.3] - 2018-12-06
 ### Bugfixes
 - Fix case sensitivity bug by renaming `HtmlPurify.php` to `Htmlpurify.php`.
 
-## v0.5.2 - 2018-12-06
+## [0.5.2] - 2018-12-06
 ### Bugfixes
 - Fix `TwigNotFoundHandler`
 
-## v0.5.1 - 2018-12-06
+## [0.5.1] - 2018-12-06
 This release introduces a temporary fix for Slim component not working with
 PHP-DI.
 
@@ -45,30 +52,30 @@ classes depending on `Twig\Environment` have been changed to use
 `Twig_Environment` instead. They might be changed back in the future once PHP-DI
 gets fixed. See http://bit.ly/2SsA5Rh for the issue.
 
-## v0.5.0 - 2018-12-05
+## [0.5.0] - 2018-12-05
 ### Breaking changes
 Pretty much everything has changed. Backwards incompatible with previous
 version. Repository got messed up. Had to rebase. Previous versions might not
 be available anymore (missing tags).
 
-### New features
+### Added
 - Slim component with various Slim Twig integration helpers.
 - New filters: HtmlPurify, RemoveEmpty.
 - Refactor TwigExtension
 
-## v0.4.0 - 2018-10-15
-### New features
+## [0.4.0] - 2018-10-15
+### Added
 #### FormatDateRange
 - Now accepts `DateTime` objects in addition to strings.
 - Can now specify a custom delimiter string (default `-`)
 
-## v0.3.0 - 2018-05-02
-### New features
+## [0.3.0] - 2018-05-02
+### Added
 - `FormatDateRange`: Option to always include year in the returned date.
 
-## v0.2.0 - 2018-04-24
-### New features
+## [0.2.0] - 2018-04-24
+### Added
 - Add `strftime` filter.
 
-## v0.1.0 - 2018-04-24
+## [0.1.0] - 2018-04-24
 Initial release.

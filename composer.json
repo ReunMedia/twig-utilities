@@ -25,10 +25,10 @@
     },
     "scripts": {
         "test": "phpunit --bootstrap vendor/autoload.php tests/phpunit",
-        "functional-test-server": "php -S localhost:8080 -t tests/functional/TwigUtilities"
-    },
-    "config": {
-        "process-timeout": 0
+        "functional-test-server": [
+            "Composer\\Config::disableProcessTimeout",
+            "php -S localhost:8080 -t tests/functional/TwigUtilities"
+        ]
     },
     "suggest": {
       "slim/slim": "Slim Framework ^4.0 is required for Slim specific features"
