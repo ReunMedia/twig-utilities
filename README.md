@@ -166,6 +166,10 @@ $c[TwigErrorRenderer::class] = function(Environment $twig) {
 $errorHandler->registerErrorRenderer("text/html", TwigErrorRenderer::class)
 ```
 
+## FAQ
+### Where is the Markdown filter?
+Use Twig's [`markdown_to_html`](https://twig.symfony.com/doc/2.x/filters/markdown_to_html.html) filter.
+
 ## Development
 
 Run `composer functional-test-server` to start a test server. The code is

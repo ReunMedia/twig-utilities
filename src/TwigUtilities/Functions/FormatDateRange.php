@@ -25,8 +25,6 @@ class FormatDateRange extends AbstractFunction
    *                                         date even if the start and end date
    *                                         are on the same year
    * @param string              $delimiter   delimiter string between dates
-   *
-   * @return string
    */
   public function __invoke($startdate, $enddate, bool $includeYear = false, string $delimiter = "-"): string
   {
@@ -39,7 +37,7 @@ class FormatDateRange extends AbstractFunction
     }
 
     if ($startdate->format("Ymd") === $enddate->format("Ymd")) {
-      $format = $includeYear ? "j.n.Y" : "j.n";
+      $format = $includeYear ? "j.n.Y" : "j.n.";
 
       return $startdate->format($format);
     }
@@ -56,7 +54,7 @@ class FormatDateRange extends AbstractFunction
       $startStr .= "{$startArr['year']}";
     }
 
-    $format = $includeYear ? "j.n.Y" : "j.n";
+    $format = $includeYear ? "j.n.Y" : "j.n.";
     $endStr = $enddate->format($format);
 
     return "{$startStr}{$delimiter}{$endStr}";
