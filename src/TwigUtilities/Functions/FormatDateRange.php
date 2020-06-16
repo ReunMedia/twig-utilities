@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Reun\TwigUtilities\Functions;
 
-use DateTime;
+use DateTimeImmutable;
+use DateTimeInterface;
 
 /**
  * Format two datetime strings.
@@ -19,17 +20,20 @@ class FormatDateRange extends AbstractFunction
    *
    * Copied from Vaho project
    *
-   * @param DateTime|int|string $startdate
-   * @param DateTime|int|string $enddate
-   * @param bool                $includeYear always include year in the returned
-   *                                         date even if the start and end date
-   *                                         are on the same year
-   * @param string              $delimiter   delimiter string between dates
+   * @param DateTimeInterface|int|string $startdate
+   * @param DateTimeInterface|int|string $enddate
+   * @param bool                         $includeYear always include year in the returned
+   *                                                  date even if the start and end date
+   *                                                  are on the same year
+   * @param string                       $delimiter   delimiter string between dates
    */
   public function __invoke($startdate, $enddate, bool $includeYear = false, string $delimiter = "-"): string
   {
-    $startdate = ($startdate instanceof DateTime) ? $startdate : new DateTime($startdate);
-    $enddate = ($enddate instanceof DateTime) ? $enddate : new DateTime($enddate);
+    $startdate = (is_int($startdate)) ? "@{$startdate}" : $startdate;
+    $enddate = (is_int($enddate)) ? "@{$enddate}" : $enddate;
+
+    $startdate = ($startdate instanceof DateTimeInterface) ? $startdate : new DateTimeImmutable($startdate);
+    $enddate = ($enddate instanceof DateTimeInterface) ? $enddate : new DateTimeImmutable($enddate);
 
     // Always include year if start and end date land are on different year.
     if ($startdate->format("Y") != $enddate->format("Y")) {
@@ -42,8 +46,8 @@ class FormatDateRange extends AbstractFunction
       return $startdate->format($format);
     }
 
-    $startArr = date_parse($startdate->format(DateTime::ATOM));
-    $endArr = date_parse($enddate->format(DateTime::ATOM));
+    $startArr = date_parse($startdate->format(DateTimeInterface::ATOM));
+    $endArr = date_parse($enddate->format(DateTimeImmutable::ATOM));
 
     $startStr = "{$startArr['day']}.";
 

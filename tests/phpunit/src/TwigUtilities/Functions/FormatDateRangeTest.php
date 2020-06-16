@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Reun\TwigUtilities\Functions;
 
 use Codeception\Specify;
+use DateTime;
+use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -37,6 +39,30 @@ final class FormatDateRangeTest extends TestCase
 
     $this->specify("use custom delimiter between dates", function () use ($function) {
       $this->assertEquals("1.3. _:_ 4.4.", $function("2017-03-01", "2017-04-04", false, " _:_ "));
+    });
+
+    $this->specify("supported input types", function () use ($function) {
+      $this->should("support a string input", function () use ($function) {
+        $date1 = "2020-06-16";
+        $date2 = "2020-06-17";
+        $this->assertEquals("16.-17.6.2020", $function($date1, $date2, true));
+      });
+
+      $this->should("support an integer input", function () use ($function) {
+        $date1 = 1592327572;
+        $date2 = 1592352000;
+        $this->assertEquals("16.-17.6.2020", $function($date1, $date2, true));
+      });
+
+      $this->should("support a DateTimeInterface input", function () use ($function) {
+        $date1 = new DateTime("2020-06-16");
+        $date2 = new DateTime("2020-06-17");
+        $this->assertEquals("16.-17.6.2020", $function($date1, $date2, true));
+
+        $date1 = new DateTimeImmutable("2020-06-16");
+        $date2 = new DateTimeImmutable("2020-06-17");
+        $this->assertEquals("16.-17.6.2020", $function($date1, $date2, true));
+      });
     });
   }
 }
