@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Reun\TwigUtilities\Filters;
 
-use DateTime;
+use DateTimeInterface;
 
 /**
  * Strftime filter with Windows locale fix.
@@ -14,8 +14,8 @@ use DateTime;
 class Strftime extends AbstractFilter
 {
   /**
-   * @param DateTime|int|string $date   date to format
-   * @param string              $format format string
+   * @param DateTimeInterface|int|string $date   date to format
+   * @param string                       $format format string
    */
   public function __invoke($date, string $format): string
   {
@@ -28,7 +28,11 @@ class Strftime extends AbstractFilter
       $format = preg_replace("/(?<!%)((?:%%)*)%-/", '\1%#', $format);
     }
 
-    $timestamp = ($date instanceof DateTime) ? $date->getTimestamp() : strtotime($date);
+    if (!is_int($date)) {
+      $timestamp = ($date instanceof DateTimeInterface) ? $date->getTimestamp() : strtotime($date);
+    } else {
+      $timestamp = $date;
+    }
 
     // FIXME - Another Windows workaround
     $formatted = strftime($format, $timestamp);
