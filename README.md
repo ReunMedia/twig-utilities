@@ -166,9 +166,24 @@ $c[TwigErrorRenderer::class] = function(Environment $twig) {
 $errorHandler->registerErrorRenderer("text/html", TwigErrorRenderer::class)
 ```
 
-## FAQ
+## FAQ and notes
 ### Where is the Markdown filter?
 Use Twig's [`markdown_to_html`](https://twig.symfony.com/doc/2.x/filters/markdown_to_html.html) filter.
+
+### Handling dates and timezones
+It is recommended to handle all dates and times as `UTC` and use that as the PHP
+timezone setting. Twig's builtin [`date`](https://twig.symfony.com/doc/3.x/filters/date.html)
+filter should be used to output dates in a different timezone and can be
+combined with `strftime`, `formatDateRange()` etc. See
+[Twig's documentation on how to set the timezone](https://twig.symfony.com/doc/3.x/filters/date.html#timezone).
+
+Example of formatting event times in different timezone:
+```twig
+<div>
+  {{ event.startDate|date|strftime('%a')|capitalize }}
+  {{ formatDateRange(event.startDate|date, event.endDate|date) }}
+</div>
+```
 
 ## Development
 
