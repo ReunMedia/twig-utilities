@@ -47,7 +47,7 @@ class TwigErrorRenderer implements ErrorRendererInterface
   {
     $template = $this->defaultTemplate;
     foreach ($this->templates as $cls => $tpl) {
-      if (\is_subclass_of($exception, $cls)) {
+      if (\is_a($exception, $cls)) {
         $template = $tpl;
       }
     }
