@@ -26,7 +26,7 @@ The recommended way is to create a new Twig extension for your project and add
 filters and functions in `getFilters()` and `getFunctions()`.
 
 ```php
-use Reun\TwigUtilities\Filters\Strftime;
+use Reun\TwigUtilities\Filters\Htmlpurify;
 use Reun\TwigUtilities\Functions\CopyrightYear;
 use Twig\Extension\AbstractExtension;
 
@@ -35,8 +35,8 @@ class MyExtension extends AbstractExtension
   public function getFilters(): array
   {
     return [
-      Strftime::getFilter(),
-    ]
+      Htmlpurify::getFilter(),
+    ];
   }
 
   public function getFunctions(): array
@@ -184,14 +184,13 @@ Use Twig's [`markdown_to_html`](https://twig.symfony.com/doc/2.x/filters/markdow
 It is recommended to handle all dates and times as `UTC` and use that as the PHP
 timezone setting. Twig's builtin [`date`](https://twig.symfony.com/doc/3.x/filters/date.html)
 filter should be used to output dates in a different timezone and can be
-combined with `strftime`, `formatDateRange()` etc. See
+combined with `formatDateRange()` etc. See
 [Twig's documentation on how to set the timezone](https://twig.symfony.com/doc/3.x/filters/date.html#timezone).
 
 Example of formatting event times in different timezone:
 
 ```twig
 <div>
-  {{ event.startDate|date|strftime('%a')|capitalize }}
   {{ formatDateRange(event.startDate|date, event.endDate|date) }}
 </div>
 ```
