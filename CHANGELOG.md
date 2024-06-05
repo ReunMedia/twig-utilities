@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.10.0] - 2024-06-05
+### Breaking changes
+- Requires PHP 8.2.
+- `strftime` filter is removed, because it used deprecated PHP functions. Use
+  [Twig's `format_datetime`
+  filter](https://twig.symfony.com/doc/3.x/filters/format_datetime.html) with
+  pattern instead.
+
 ## [0.9.4] - 2020-06-23
 ### Fixed
 - Fix `TwigErrorRenderer` not working.
