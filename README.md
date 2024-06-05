@@ -198,5 +198,5 @@ Example of formatting event times in different timezone:
 
 ## Development
 
-Run `composer functional-test-server` to start a test server. The code is
-located in `tests/functional/TwigUtilities`.
+Run `composer dev` to start a test server. The code is located in
+`tests/functional/TwigUtilities`.
