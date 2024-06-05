@@ -1,5 +1,7 @@
 <h1>Twig Utilities Functional Test Page</h1>
 <h2>Filter tests</h2>
+<h3>htmlpurify</h3>
+{{ "<p>test</p><script>alert(123)</script>"|raw|htmlpurify }}
 <hr>
 
 <h2>Function tests</h2>
