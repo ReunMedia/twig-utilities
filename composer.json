@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "php": "^7.4",
+        "php": "^8.2",
         "twig/twig": "^3.0",
         "psr/http-server-middleware": "^1.0",
         "psr/http-server-handler": "^1.0",
