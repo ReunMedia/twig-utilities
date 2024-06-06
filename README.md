@@ -4,13 +4,14 @@ Various utility filters, functions and Slim integration for Twig.
 
 ## Installation
 
-1. Add private package as VCS repository
+1. Add private package as VCS repository to your project
 
 ```sh
-composer config --global repositories.reun/twig-utilities vcs git@github.com:Reun-Media/twig-utilities.git
+composer config repositories.reun/twig-utilities vcs git@github.com:Reun-Media/twig-utilities.git
 ```
 
 2. Install package using Composer
+
 ```sh
 composer require reun/twig-utilities
 ```
