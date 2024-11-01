@@ -1,16 +1,19 @@
 #
-# Reun Media EditorConfig.
+# Reun Media EditorConfig
 #
-# @author Kimmo Salmela <kimmo.salmela@reun.eu>
+# @author Reun Media <company@reun.eu>
 # @copyright 2020 Reun Media
 #
-# @see https://gitlab.com/reun/webdev/generator-reun-webapp
+# @see https://github.com/Reun-Media/project-templates/blob/master/base/webdev/.editorconfig
 #
-# @version 1.0.0
+# @version 2.3.0
 #
 
 root = true
 
+###########
+# General #
+###########
 [*]
 charset = utf-8
 end_of_line = lf
@@ -22,5 +25,19 @@ trim_trailing_whitespace = true
 [*.md]
 trim_trailing_whitespace = false
 
+[*.{yaml,yml}]
+trim_trailing_whitespace = false
+
+#######
+# PHP #
+#######
+[*.php]
+indent_size = 4
+
 [composer.json]
 indent_size = 4
+
+###########
+# Project #
+###########
+# Add project specific configuration below.
