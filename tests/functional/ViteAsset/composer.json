@@ -1,0 +1,26 @@
+{
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../.."
+        }
+    ],
+    "scripts": {
+        "dev": [
+            "echo 'Script-based Vite detection'",
+            "Composer\\Config::disableProcessTimeout",
+            ". ../../../bin/detect-vite-dev-server.sh && detect_vite frontend:5173 localhost:5173 && php -S 0.0.0.0:8080 -t www"
+        ],
+        "dev2": [
+            "echo 'Runtime Vite detection'",
+            "Composer\\Config::disableProcessTimeout",
+            "php -S 0.0.0.0:8080 -t www"
+        ]
+    },
+    "require": {
+        "reun/twig-utilities": "dev-master"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^7.1"
+    }
+}
