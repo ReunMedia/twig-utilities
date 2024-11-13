@@ -26,17 +26,6 @@ class DynamicTwigPage extends AbstractTwigPage
     private string $pagesPrefix;
 
     /**
-     * Current request template path.
-     */
-    private string $template;
-
-    /**
-     * Current request data. Used by `getData()` to return dynamic data based on
-     * the request.
-     */
-    private array $data = [];
-
-    /**
      * `page` argument of current request. Used for various dynamic properties.
      * NOTE - `/` is parsed as `$indexTemplate` by the request handler.
      */

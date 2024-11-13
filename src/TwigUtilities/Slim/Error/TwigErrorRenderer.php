@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Reun\TwigUtilities\Slim\Error;
 
-use Psr\Http\Message\ResponseFactoryInterface;
 use Slim\Interfaces\ErrorRendererInterface;
 use Twig\Environment;
 
@@ -13,7 +12,6 @@ use Twig\Environment;
  */
 class TwigErrorRenderer implements ErrorRendererInterface
 {
-    private ResponseFactoryInterface $responseFactory;
     private Environment $twig;
 
     /**
