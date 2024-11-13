@@ -1,8 +1,8 @@
 {
     "name": "reun/twig-utilities",
     "description": "Various Twig utilities and extensions",
-    "type": "library",
     "license": "MIT",
+    "type": "library",
     "authors": [
         {
             "name": "Kimmo Salmela",
@@ -17,30 +17,37 @@
         "psr/http-server-middleware": "^1.0",
         "twig/twig": "^3.0"
     },
-    "autoload": {
-        "psr-4": {
-            "Reun\\TwigUtilities\\": "src/TwigUtilities"
-        }
-    },
     "require-dev": {
         "codeception/specify": "^1.3",
+        "ergebnis/composer-normalize": "^2.44",
         "php-di/php-di": "^6.0",
         "phpunit/phpunit": "^9.1",
         "reun/php-app-config": "^0.2.0",
         "slim/slim": "^4.4"
     },
+    "suggest": {
+        "ezyang/htmlpurifier": "Required by HtmlPurify filter",
+        "slim/slim": "Slim Framework ^4.0 is required for Slim specific features"
+    },
+    "autoload": {
+        "psr-4": {
+            "Reun\\TwigUtilities\\": "src/TwigUtilities"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true
+        }
+    },
     "scripts": {
-        "test": "phpunit --bootstrap vendor/autoload.php tests/phpunit",
         "dev": [
             "Composer\\Config::disableProcessTimeout",
             "php -S localhost:8080 -t tests/functional/TwigUtilities"
         ],
         "lint": [
+            "composer normalize",
             "vendor/bin/php-cs-fixer fix ."
-        ]
-    },
-    "suggest": {
-        "ezyang/htmlpurifier": "Required by HtmlPurify filter",
-        "slim/slim": "Slim Framework ^4.0 is required for Slim specific features"
+        ],
+        "test": "phpunit --bootstrap vendor/autoload.php tests/phpunit"
     }
 }
