@@ -12,6 +12,12 @@
 #
 # Example with multiple hosts:
 #   ... detect_vite firsthost:5173 secondhost:5173 && php -S ...
+#
+
+# Developer notes
+#
+# - Adding this script to `bin` in `composer.json` doesn't work, since you
+#   apparently cannot source scripts from `vendor/bin`
 
 detect_vite() {
   VITE_DEV_SERVER_URL=""
