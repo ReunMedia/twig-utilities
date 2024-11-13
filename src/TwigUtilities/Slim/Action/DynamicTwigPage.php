@@ -65,7 +65,7 @@ class DynamicTwigPage extends AbstractTwigPage
 
         // ... or we're dealing with a subclassed route action in which case the
         // subclass name is used as the page name by default.
-        return strtolower(substr(strrchr(static::class, '\\'), 1));
+        return strtolower(substr(strrchr(static::class, '\\') ?: "", 1));
     }
 
     public function getTemplate(): string
