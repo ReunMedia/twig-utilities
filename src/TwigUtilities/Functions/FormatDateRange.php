@@ -43,8 +43,22 @@ class FormatDateRange extends AbstractFunction
             return $startdate->format($format);
         }
 
-        $startArr = date_parse($startdate->format(\DateTimeInterface::ATOM));
-        $endArr = date_parse($enddate->format(\DateTimeImmutable::ATOM));
+        // TODO - PHPStan doesn't support type narrowing inside foreach loop.
+        // Using a temporary variable as a workaround.
+        //
+        // See: https://github.com/phpstan/phpstan/issues/7076
+        $startArr2 = date_parse($startdate->format(\DateTimeInterface::ATOM));
+        $endArr2 = date_parse($enddate->format(\DateTimeImmutable::ATOM));
+        $startArr = [];
+        $endArr = [];
+        foreach (["day", "month", "year"] as $k) {
+            if (is_int($startArr2[$k])) {
+                $startArr[$k] = $startArr2[$k];
+            }
+            if (is_int($endArr2[$k])) {
+                $endArr[$k] = $endArr2[$k];
+            }
+        }
 
         $startStr = "{$startArr['day']}.";
 

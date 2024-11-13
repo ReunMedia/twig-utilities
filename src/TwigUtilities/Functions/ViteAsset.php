@@ -133,7 +133,7 @@ class ViteAsset extends AbstractFunction
 
         $manifest = $this->manifest[$assetName] ?? [];
 
-        if (!is_array($manifest) || !isset($manifest["file"])) {
+        if (!is_array($manifest) || !is_string($manifest["file"])) {
             trigger_error("Asset '{$assetName}' doesn't exist in manifest");
 
             return "";
