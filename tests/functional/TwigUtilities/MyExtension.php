@@ -9,18 +9,18 @@ use Twig\Extension\AbstractExtension;
 
 class MyExtension extends AbstractExtension
 {
-  public function getFilters(): array
-  {
-    return [
-      Htmlpurify::getFilter(),
-    ];
-  }
+    public function getFilters(): array
+    {
+        return [
+            Htmlpurify::getFilter(),
+        ];
+    }
 
-  public function getFunctions(): array
-  {
-    return [
-      CopyrightYear::getFunction(),
-      FormatDateRange::getFunction(),
-    ];
-  }
+    public function getFunctions(): array
+    {
+        return [
+            CopyrightYear::getFunction(),
+            FormatDateRange::getFunction(),
+        ];
+    }
 }

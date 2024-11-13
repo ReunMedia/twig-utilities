@@ -14,8 +14,8 @@ use Twig\TwigFilter;
  */
 abstract class AbstractFilter extends AbstractTwigFunction
 {
-  public static function getFilter(): TwigFilter
-  {
-    return new TwigFilter(static::getName(), [static::class, "__invoke"], static::getOptions());
-  }
+    public static function getFilter(): TwigFilter
+    {
+        return new TwigFilter(static::getName(), [static::class, "__invoke"], static::getOptions());
+    }
 }

@@ -3,12 +3,12 @@
 declare(strict_types=1);
 
 use DI\Container;
-use Reun\TwigUtilities\Functions\CopyrightYear;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 use Twig\RuntimeLoader\ContainerRuntimeLoader;
 
 require_once "../../../vendor/autoload.php";
+
 require_once "./MyExtension.php";
 
 $loader = new FilesystemLoader();

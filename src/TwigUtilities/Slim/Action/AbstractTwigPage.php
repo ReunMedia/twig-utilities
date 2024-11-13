@@ -14,32 +14,32 @@ use Twig\Environment;
  */
 abstract class AbstractTwigPage
 {
-  protected Environment $twig;
+    protected Environment $twig;
 
-  public function __construct(Environment $twig)
-  {
-    $this->twig = $twig;
-  }
+    public function __construct(Environment $twig)
+    {
+        $this->twig = $twig;
+    }
 
-  /**
-   * Returns data passed to the Twig template.
-   */
-  public function getData(): array
-  {
-    return [];
-  }
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    {
+        $data = $this->getData();
+        $template = $this->getTemplate();
+        $response->getBody()->write($this->twig->render($template, $data));
 
-  /**
-   * Returns path to Twig template.
-   */
-  abstract public function getTemplate(): string;
+        return $response;
+    }
 
-  public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
-  {
-    $data = $this->getData();
-    $template = $this->getTemplate();
-    $response->getBody()->write($this->twig->render($template, $data));
+    /**
+     * Returns data passed to the Twig template.
+     */
+    public function getData(): array
+    {
+        return [];
+    }
 
-    return $response;
-  }
+    /**
+     * Returns path to Twig template.
+     */
+    abstract public function getTemplate(): string;
 }

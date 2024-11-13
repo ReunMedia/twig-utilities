@@ -10,23 +10,23 @@ use Twig\Environment;
 
 class StaticTwigPage
 {
-  private Environment $twig;
+    private Environment $twig;
 
-  private string $template;
+    private string $template;
 
-  private array $data;
+    private array $data;
 
-  public function __construct(Environment $twig, string $template, array $data = [])
-  {
-    $this->twig = $twig;
-    $this->template = $template;
-    $this->data = $data;
-  }
+    public function __construct(Environment $twig, string $template, array $data = [])
+    {
+        $this->twig = $twig;
+        $this->template = $template;
+        $this->data = $data;
+    }
 
-  public function __invoke(ServerRequestInterface $request, ResponseInterface $response, $args): ResponseInterface
-  {
-    $response->getBody()->write($this->twig->render($this->template, $this->data));
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, $args): ResponseInterface
+    {
+        $response->getBody()->write($this->twig->render($this->template, $this->data));
 
-    return $response;
-  }
+        return $response;
+    }
 }
