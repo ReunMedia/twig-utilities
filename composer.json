@@ -39,8 +39,5 @@
     "suggest": {
         "ezyang/htmlpurifier": "Required by HtmlPurify filter",
         "slim/slim": "Slim Framework ^4.0 is required for Slim specific features"
-    },
-    "bin": [
-        "bin/detect-vite-dev-server.sh"
-    ]
+    }
 }

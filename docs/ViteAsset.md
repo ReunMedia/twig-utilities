@@ -99,7 +99,7 @@ your dev server host and port):
   "scripts": {
       "dev": [
           "Composer\\Config::disableProcessTimeout",
-          ". ./vendor/bin/detect-vite-dev-server && detect_vite frontend:5173 && php -S 0.0.0.0:8080 -t www"
+          ". vendor/reun/twig-utilities/bin/detect-vite-dev-server.sh && detect_vite frontend:5173 && php -S 0.0.0.0:8080 -t www"
       ]
   }
 ```
