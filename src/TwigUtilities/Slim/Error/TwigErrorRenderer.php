@@ -12,33 +12,25 @@ use Twig\Environment;
  */
 class TwigErrorRenderer implements ErrorRendererInterface
 {
-    private Environment $twig;
-
     /**
-     * Default template used when no template is given for a specific exception.
+     * @param string $defaultTemplate default template used when no template is
+     *                                given for a specific exception
      */
-    private string $defaultTemplate;
-
-    /**
-     * Templates to render for different exceptions.
-     *
-     * @var string[]
-     */
-    private array $templates = [];
-
-    /**
-     * @param string   $defaultTemplate default template used when no template is
-     *                                  given for a specific exception
-     * @param string[] $templates       list of templates for specific exception
-     *                                  types where array keys correspond to
-     *                                  exception class types
-     */
-    public function __construct(Environment $twig, string $defaultTemplate, array $templates = [])
-    {
-        $this->twig = $twig;
-        $this->defaultTemplate = $defaultTemplate;
-        $this->templates = $templates;
-    }
+    public function __construct(
+        private Environment $twig,
+        /**
+         * Default template used when no template is given for a specific exception.
+         */
+        private string $defaultTemplate,
+        /**
+         * Templates to render for different exceptions.
+         *
+         * Array keys are exception types and values are Twig templates.
+         *
+         * @var array<class-string<\Throwable>,string>
+         */
+        private array $templates = []
+    ) {}
 
     public function __invoke(\Throwable $exception, bool $displayErrorDetails): string
     {

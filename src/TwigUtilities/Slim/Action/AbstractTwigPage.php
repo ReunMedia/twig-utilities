@@ -14,15 +14,18 @@ use Twig\Environment;
  */
 abstract class AbstractTwigPage
 {
-    protected Environment $twig;
+    public function __construct(
+        protected Environment $twig
+    ) {}
 
-    public function __construct(Environment $twig)
-    {
-        $this->twig = $twig;
-    }
-
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
-    {
+    /**
+     * @param array<string,string> $args
+     */
+    public function __invoke(
+        ServerRequestInterface $request,
+        ResponseInterface $response,
+        array $args
+    ): ResponseInterface {
         $data = $this->getData();
         $template = $this->getTemplate();
         $response->getBody()->write($this->twig->render($template, $data));
@@ -32,6 +35,8 @@ abstract class AbstractTwigPage
 
     /**
      * Returns data passed to the Twig template.
+     *
+     * @return array<string,mixed>
      */
     public function getData(): array
     {

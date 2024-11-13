@@ -28,7 +28,7 @@ abstract class AbstractTwigFunction
     /**
      * Returns the options for this Twig function.
      *
-     * @return array options
+     * @return array<string,mixed> options
      */
     public static function getOptions(): array
     {

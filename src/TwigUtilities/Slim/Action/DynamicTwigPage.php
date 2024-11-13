@@ -21,11 +21,6 @@ class DynamicTwigPage extends AbstractTwigPage
     public string $indexTemplate = "index";
 
     /**
-     * Pages directory path.
-     */
-    private string $pagesPrefix;
-
-    /**
      * `page` argument of current request. Used for various dynamic properties.
      * NOTE - `/` is parsed as `$indexTemplate` by the request handler.
      */
@@ -36,10 +31,14 @@ class DynamicTwigPage extends AbstractTwigPage
      *                            Twig namespace which allows you to define the
      *                            path in Twig configuration.
      */
-    public function __construct(Environment $twig, string $pagesPrefix = "@pages")
-    {
+    public function __construct(
+        Environment $twig,
+        /**
+         * Pages directory path.
+         */
+        private string $pagesPrefix = "@pages"
+    ) {
         parent::__construct($twig);
-        $this->pagesPrefix = $pagesPrefix;
     }
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, $args): ResponseInterface
