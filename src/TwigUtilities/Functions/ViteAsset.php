@@ -6,6 +6,8 @@ namespace Reun\TwigUtilities\Functions;
 
 /**
  * Add CSS and JS assets built by Vite to Twig templates.
+ *
+ * @see /docs/ViteAsset.md
  */
 class ViteAsset extends AbstractFunction
 {
