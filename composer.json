@@ -22,6 +22,7 @@
         "ergebnis/composer-normalize": "^2.44",
         "friendsofphp/php-cs-fixer": "^3.64",
         "php-di/php-di": "^6.0",
+        "phpstan/phpstan": "^2.0",
         "phpunit/phpunit": "^9.1",
         "reun/php-app-config": "^0.2.0",
         "slim/slim": "^4.4"
@@ -47,7 +48,8 @@
         ],
         "lint": [
             "composer normalize",
-            "vendor/bin/php-cs-fixer fix ."
+            "vendor/bin/php-cs-fixer fix .",
+            "vendor/bin/phpstan"
         ],
         "test": "phpunit --bootstrap vendor/autoload.php tests/phpunit"
     }
