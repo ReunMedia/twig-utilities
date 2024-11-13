@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Reun\TwigUtilities\Config;
 
+use Reun\PhpAppConfig\Config\AbstractAppConfig;
 use Reun\PhpAppConfig\Config\DefinitionsInterface;
+use Reun\TwigUtilities\Functions\ViteAsset;
 use Reun\TwigUtilities\Slim\Error\TwigErrorRenderer;
 use Slim\Exception\HttpNotFoundException;
 use Slim\Interfaces\ErrorRendererInterface;
@@ -38,6 +40,13 @@ final class TwigUtilitiesDefinitions implements DefinitionsInterface
 
         // Use Twig error renderer as Slim error renderer
         $c[ErrorRendererInterface::class] = fn (TwigErrorRenderer $x): ErrorRendererInterface => $x;
+
+        $c[ViteAsset::class] = function (AbstractAppConfig $appConfig): ViteAsset {
+            return new ViteAsset(
+                "{$appConfig->webroot}/static/dist/.vite/manifest.json",
+                $appConfig->isDev()
+            );
+        };
 
         return $c;
     }
