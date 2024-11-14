@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.11.0] - 2024-11-14
+
+### Changed
+
+- **Breaking:** Following non-essential Composer packages are no longer
+  automatically required and must be installed manually:
+  - `ezyang/htmlpurifier`
+  - `psr/http-message`
+  - `psr/http-server-handler`
+  - `psr/http-server-middleware`
+
+### Added
+
+- New function: `ViteAsset`. See [docs](docs/ViteAsset.md) for more info.
+- Add DI definitions
+- Add more detailed documentation of some features
+
 ## [0.10.1] - 2024-06-14
 
 ### Changed
