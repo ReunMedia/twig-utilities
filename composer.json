@@ -50,6 +50,7 @@
             "php -S localhost:8080 -t tests/functional/TwigUtilities"
         ],
         "lint": [
+            "composer validate",
             "composer normalize",
             "vendor/bin/php-cs-fixer fix .",
             "vendor/bin/phpstan"
