@@ -8,6 +8,9 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Twig\Environment;
 
+/**
+ * Map route to a specific Twig template with optional data.
+ */
 class StaticTwigPage
 {
     public function __construct(

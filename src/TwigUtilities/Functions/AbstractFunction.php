@@ -8,9 +8,7 @@ use Reun\TwigUtilities\AbstractTwigFunction;
 use Twig\TwigFunction;
 
 /**
- * Description of AbstractFunction.
- *
- * @author Kimmo Salmela <kimmo.salmela@reun.eu>
+ * Base class for Twig functions.
  */
 abstract class AbstractFunction extends AbstractTwigFunction
 {

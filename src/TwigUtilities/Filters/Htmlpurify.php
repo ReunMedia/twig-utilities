@@ -6,8 +6,6 @@ namespace Reun\TwigUtilities\Filters;
 
 /**
  * HTML Purifier filter.
- *
- * @author Kimmo Salmela <kimmo.salmela@reun.eu>
  */
 class Htmlpurify extends AbstractFilter
 {

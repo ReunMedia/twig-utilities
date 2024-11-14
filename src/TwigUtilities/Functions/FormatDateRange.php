@@ -6,8 +6,6 @@ namespace Reun\TwigUtilities\Functions;
 
 /**
  * Format two datetime strings.
- *
- * @author Kimmo Salmela <kimmo.salmela@reun.eu>
  */
 class FormatDateRange extends AbstractFunction
 {

@@ -16,8 +16,6 @@ use Twig\Error\LoaderError;
 /**
  * Definitions for Reun Twig utilities.
  *
- * Configures `TwigErrorRenderer` as default renderer for errors in production.
- *
  * @see https://github.com/twigphp/Twig
  *
  * @version 1.0.0

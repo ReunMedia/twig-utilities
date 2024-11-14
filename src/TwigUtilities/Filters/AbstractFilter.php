@@ -8,9 +8,7 @@ use Reun\TwigUtilities\AbstractTwigFunction;
 use Twig\TwigFilter;
 
 /**
- * Description of Strftime.
- *
- * @author Kimmo Salmela <kimmo.salmela@reun.eu>
+ * Base class for Twig filters.
  */
 abstract class AbstractFilter extends AbstractTwigFunction
 {

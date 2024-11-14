@@ -7,8 +7,6 @@ namespace Reun\TwigUtilities;
 /**
  * Twig Function defined as an invokable class. Extend this class and add
  * `__invoke()` method as the function implementation.
- *
- * @author Kimmo Salmela <kimmo.salmela@reun.eu>
  */
 abstract class AbstractTwigFunction
 {
@@ -16,7 +14,7 @@ abstract class AbstractTwigFunction
      * Returns the name of the Twig function.
      * Defaults to camelCased class name (`lcfirst(class)`).
      *
-     * @return string twig function name
+     * @return string Twig function name
      */
     public static function getName(): string
     {

@@ -8,7 +8,7 @@ use Slim\Interfaces\ErrorRendererInterface;
 use Twig\Environment;
 
 /**
- * Twig template renderer for Slim errors.
+ * Render Slim errors using Twig templates.
  */
 class TwigErrorRenderer implements ErrorRendererInterface
 {

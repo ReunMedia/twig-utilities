@@ -7,7 +7,7 @@ templates.
 
 ### Reun PHP App Template
 
-`ViteAsset` is automatically configured for default Reun PHP App Template in the
+`ViteAsset` is automatically configured for Reun PHP App Template in the
 included definitions.
 
 First include the definitions:
@@ -54,7 +54,7 @@ export default defineConfig({
 ```
 
 ```php
-$isDev = runningInDevMode();
+// Twig configuration
 $viteAsset = new ViteAsset(__DIR__."/path/to/.vite/manifest.json", $isDev);
 $twig->addFunction(new TwigFunction(
     ViteAsset::getName(),

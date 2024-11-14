@@ -53,8 +53,9 @@ $twig->addExtension(new MyExtension());
 ```
 
 Some filters and functions have external dependencies. To use them you must add
-a [runtime loader](https://twig.symfony.com/doc/3.x/advanced.html#definition-vs-runtime)
-to Twig environment.
+a [runtime
+loader](https://twig.symfony.com/doc/3.x/advanced.html#definition-vs-runtime) to
+Twig environment.
 
 ```php
 use DI\Container;
@@ -69,124 +70,46 @@ Just extend either `Reun\TwigUtilities\Filters\AbstractFilter` or
 `Reun\TwigUtilities\Functions\AbstractFunction` and implement `__invoke()`.
 Options can be specified by overriding `getOptions()` method.
 
-## Usage - Slim utilities
+## Available features
 
-The Slim component provides classes that help integrate Twig views into a Slim
-application.
+### Filters
 
-### DynamicTwigPage
+|            |                                                                   |
+| ---------- | ----------------------------------------------------------------- |
+| htmlpurify | Sanitizes a string with [HTML Purifier](http://htmlpurifier.org/) |
 
-`DynamicTwigPage` class allows you to easily combine Slim actions with specific
-Twig views with support for automatic template rendering based on the requested
-route.
+### Functions
 
-To get started simply create a directory for your Twig templates with each page
-located in its own subdirectory and assign it to a Twig namespace. Then just
-register `DynamicTwigPage` as the catch-all Slim route action.
+|                                |                                                            |
+| ------------------------------ | ---------------------------------------------------------- |
+| copyrightYear                  | Dynamic year range                                         |
+| formatDateRange                | Format date and time according to Finnish date conventions |
+| [viteAsset](docs/ViteAsset.md) | Add CSS and JS assets built by Vite to Twig templates      |
 
-```
-view/public/pages/
-  about/
-    about.twig
-  index/
-    index.twig
-  news/
-    news.twig
-```
+### Slim utilities
 
-```php
-// Twig configuration
-$loader = new FileSystemLoader();
-// @pages namespace is used by default.
-$loader->addPath("view/public/pages", "pages");
-```
-
-```php
-// Slim routes
-$app->get("/{page}", DynamicTwigPage::class);
-```
-
-`DynamicTwigPage` can be extended to provide custom data to templates.
-
-```php
-class NewsAction extends DynamicTwigPage
-{
-  private $newsManager;
-
-  public function __construct(NewsManager $newsManager, Environment $twig, string $pagesPrefix = "@pages")
-  {
-    parent::__construct($twig, $pagesPrefix);
-    $this->newsManager = $newsManager;
-  }
-
-  public function getData(): array
-  {
-    $data = parent::getData();
-    $data["news"] = $newsManager->getNews();
-    return $data;
-  }
-}
-```
-
-```php
-// Slim routes
-$app->get("/news", NewsAction::class);
-$app->get("/{page}", DynamicTwigPage::class);
-```
-
-#### Handling Not Found errors
-
-In case a template is not found, a Twig `LoaderError` is thrown.
-`TwigLoaderErrorHandler` can be used to catch it and convert it to Slim's
-`NotFoundException` that will be handled by the framework. See [Rendering Slim
-errors with Twig](#rendering-slim-errors-with-twig) on how to render error pages
-with Twig.
-
-```php
-use Reun\TwigUtilities\Slim\Error\TwigLoaderErrorHandler;
-use Twig\Error\LoaderError;
-
-$errorMiddleware = $app->addErrorMiddleware(true, true, true);
-$errorMiddleware->setErrorHandler(LoaderError::class, new TwigLoaderErrorHandler());
-```
-
-### Rendering Slim errors with Twig
-
-You can use the `Reun\TwigUtilities\Slim\TwigErrorRenderer` class to with Slim
-to render error messages. See [Error Handling Middleware](http://www.slimframework.com/docs/v4/middleware/error-handling.html) in Slim documentation for more info.
-
-```php
-// definitions.php
-$c[TwigErrorRenderer::class] = function(Environment $twig) {
-  // Default template used for errors.
-  $defaultTemplate = "@pages/errors/default.twig";
-
-  // Templates for specific error types
-  $templates = [
-    HttpNotFoundException::class => "@pages/errors/notFound.twig",
-    HttpForbiddenException::class => "@pages/errors/forbidden.twig",
-  ];
-
-  return new TwigErrorRenderer($twig, $defaultTemplate, $templates);
-}
-
-// bootstrap.php
-$errorHandler->registerErrorRenderer("text/html", TwigErrorRenderer::class)
-```
+|                                                |                                                           |
+| ---------------------------------------------- | --------------------------------------------------------- |
+| [DynamicTwigPage](docs/DynamicTwigPage.md)     | Dynamic Slim routing to Twig templates with optional data |
+| StaticTwigPage                                 | Map route to a specific Twig template with optional data  |
+| [TwigErrorRenderer](docs/TwigErrorRenderer.md) | Render errors as Twig templates                           |
 
 ## FAQ and notes
 
 ### Where is the Markdown filter?
 
-Use Twig's [`markdown_to_html`](https://twig.symfony.com/doc/2.x/filters/markdown_to_html.html) filter.
+Use Twig's own
+[`markdown_to_html`](https://twig.symfony.com/doc/3.x/filters/markdown_to_html.html)
+filter.
 
 ### Handling dates and timezones
 
 It is recommended to handle all dates and times as `UTC` and use that as the PHP
-timezone setting. Twig's builtin [`date`](https://twig.symfony.com/doc/3.x/filters/date.html)
-filter should be used to output dates in a different timezone and can be
-combined with `formatDateRange()` etc. See
-[Twig's documentation on how to set the timezone](https://twig.symfony.com/doc/3.x/filters/date.html#timezone).
+timezone setting. Twig's builtin
+[`date`](https://twig.symfony.com/doc/3.x/filters/date.html) filter should be
+used to output dates in a different timezone and can be combined with
+`formatDateRange()` etc. See [Twig's documentation on how to set the
+timezone](https://twig.symfony.com/doc/3.x/filters/date.html#timezone).
 
 Example of formatting event times in different timezone:
 
