@@ -19,8 +19,5 @@
     },
     "require": {
         "reun/twig-utilities": "dev-master"
-    },
-    "require-dev": {
-        "symfony/var-dumper": "^7.1"
     }
 }
