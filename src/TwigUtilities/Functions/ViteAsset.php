@@ -53,8 +53,9 @@ class ViteAsset extends AbstractFunction
         }
 
         // Load manifest file if Vite dev server is not running.
-        if (!$this->viteDevServerUrl) {
+        if (!(bool) $this->viteDevServerUrl) {
             $this->manifest = (array) json_decode(
+                // @phpstan-ignore ternary.shortNotAllowed
                 file_get_contents($manifestFile) ?: "[]",
                 true
             );
@@ -70,7 +71,7 @@ class ViteAsset extends AbstractFunction
         $result = "";
 
         // Inject Vite client in dev mode first time this function is called.
-        if ($this->viteDevServerUrl && !$this->clientInjected) {
+        if ((bool) $this->viteDevServerUrl && !$this->clientInjected) {
             $result .= $this->createScriptTag($this->assetUrl(
                 "@vite/client",
             ));
@@ -83,7 +84,7 @@ class ViteAsset extends AbstractFunction
         // Detect asset URL extension to handle `.css` files.
         $url = parse_url($assetUrl, PHP_URL_PATH);
 
-        if (!$url) {
+        if (!(bool) $url) {
             throw new \Exception("Invalid asset URL '{$url}'");
         }
 
@@ -91,7 +92,7 @@ class ViteAsset extends AbstractFunction
 
         // Create style tag for CSS files when not in dev mode. Styles are
         // automatically served by Vite in dev mode.
-        if ("css" === $ext && !$this->viteDevServerUrl) {
+        if ("css" === $ext && !(bool) $this->viteDevServerUrl) {
             $result .= $this->createStyleTag($assetUrl);
         } else {
             $result .= $this->createScriptTag($assetUrl);
@@ -127,7 +128,7 @@ class ViteAsset extends AbstractFunction
     private function assetUrl(string $assetName): string
     {
         // Use dev server if it's up
-        if ($this->viteDevServerUrl) {
+        if ((bool) $this->viteDevServerUrl) {
             return "{$this->viteDevServerUrl}/{$assetName}";
         }
 
@@ -163,12 +164,12 @@ class ViteAsset extends AbstractFunction
             // There's no easy way to circumvent this in PHP. Trust me. I've
             // spent hours researching and adjusting various cURL options to no
             // avail.
-            if (@get_headers($this->viteDevServerUrl)) {
+            if ((bool) @get_headers($this->viteDevServerUrl)) {
                 return $this->viteDevServerUrl;
             }
         }
 
-        if (!$viteUrl) {
+        if (!(bool) $viteUrl) {
             return "";
         }
 

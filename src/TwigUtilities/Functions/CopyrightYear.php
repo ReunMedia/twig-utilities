@@ -15,8 +15,8 @@ class CopyrightYear extends AbstractFunction
         $endYear = $endYear ?? date("Y");
         $startYDt = \DateTimeImmutable::createFromFormat("Y", "{$fromYear}");
         $endYDt = \DateTimeImmutable::createFromFormat("Y", "{$endYear}");
-        $startY = $startYDt ? $startYDt->format("Y") : "";
-        $endY = $endYDt ? $endYDt->format("Y") : "";
+        $startY = (bool) $startYDt ? $startYDt->format("Y") : "";
+        $endY = (bool) $endYDt ? $endYDt->format("Y") : "";
 
         return ($startY >= $endY) ? $startY : "{$startY}-{$endY}";
     }

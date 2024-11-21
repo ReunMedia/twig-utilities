@@ -37,7 +37,7 @@ class FormatDateRange extends AbstractFunction
             : new \DateTimeImmutable($enddate);
 
         // Always include year if start and end date land are on different year.
-        if ($startdate->format("Y") != $enddate->format("Y")) {
+        if ($startdate->format("Y") !== $enddate->format("Y")) {
             $includeYear = true;
         }
 

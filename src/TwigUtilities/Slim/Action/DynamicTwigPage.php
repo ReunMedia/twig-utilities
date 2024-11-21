@@ -54,17 +54,19 @@ class DynamicTwigPage extends AbstractTwigPage
     public function getCurrentPageName(): string
     {
         // By default `pageArg` is determined by the route argument.
-        if ($this->pageArg) {
+        if ("" !== $this->pageArg) {
             return $this->pageArg;
         }
 
         // If page argument is not set either index was requested...
-        if (self::class == static::class) {
+        if (self::class === static::class) {
             return $this->indexTemplate;
         }
 
         // ... or we're dealing with a subclassed route action in which case the
         // subclass name is used as the page name by default.
+        // TODO - This can be rewritten using `basename`
+        // @phpstan-ignore ternary.shortNotAllowed
         return strtolower(substr(strrchr(static::class, '\\') ?: "", 1));
     }
 

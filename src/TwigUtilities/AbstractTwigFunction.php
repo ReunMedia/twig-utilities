@@ -21,7 +21,7 @@ abstract class AbstractTwigFunction
     {
         $classname = static::class;
 
-        return lcfirst(substr($classname, strrpos($classname, "\\") + 1));
+        return lcfirst(substr($classname, ((int) strrpos($classname, "\\")) + 1));
     }
 
     /**
