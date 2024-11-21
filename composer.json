@@ -5,6 +5,10 @@
     "type": "library",
     "authors": [
         {
+            "name": "Kimmo Salmela",
+            "email": "kimmo.salmela@reun.eu"
+        },
+        {
             "name": "Reun Media",
             "email": "company@reun.eu",
             "homepage": "https://reun.eu"
