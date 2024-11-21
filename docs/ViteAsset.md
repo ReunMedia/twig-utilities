@@ -110,3 +110,20 @@ first one that responds:
 ```
 ...detect_vite frontend:5173 localhost:5173 && php -S...
 ```
+
+## Examples
+
+### Using a separate frontend container in production
+
+```php
+$c[Vite::class] = function (AppConfig $appConfig) {
+    $manifestFile = $appConfig->isDev()
+        // Use locally generated manifest file in development
+        ? "{$appConfig->webroot}/static/dist/.vite/manifest.json",
+        // Get manifest from Caddy container in production, since that's where
+        // the frontend is built
+        : "http://caddy:80/static/dist/.vite/manifest.json";
+
+    return new Vite($manifestFile, $appConfig->isDev());
+};
+```
