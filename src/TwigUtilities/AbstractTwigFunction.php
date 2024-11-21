@@ -12,6 +12,7 @@ abstract class AbstractTwigFunction
 {
     /**
      * Returns the name of the Twig function.
+     *
      * Defaults to camelCased class name (`lcfirst(class)`).
      *
      * @return string Twig function name

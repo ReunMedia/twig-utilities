@@ -154,13 +154,15 @@ class ViteAsset extends AbstractFunction
         // Use runtime dev server detection if no env variable is set.
         if (false === $viteUrl) {
             //
-            // This is where the slowdown might happen. The request starts with a
-            // DNS query that has a long OS-level timeout. This means that if the
-            // dev server URL is not accessible (meaning DNS error, not server
-            // error), there's a significant delay before the request fails.
+            // This is where the slowdown might happen. The request starts with
+            // a DNS query that has a long OS-level timeout. This means that if
+            // the dev server URL is not accessible (meaning DNS error, not
+            // server error), there's a significant delay before the request
+            // fails.
             //
-            // There's no easy way to circumvent this in PHP. Trust me. I've spent
-            // hours researching and adjusting various cURL options to no avail.
+            // There's no easy way to circumvent this in PHP. Trust me. I've
+            // spent hours researching and adjusting various cURL options to no
+            // avail.
             if (@get_headers($this->viteDevServerUrl)) {
                 return $this->viteDevServerUrl;
             }
@@ -170,8 +172,8 @@ class ViteAsset extends AbstractFunction
             return "";
         }
 
-        // `http://` is not always used when detecting the URL, so we add it
-        // if it doesn't exist and the dev server is up.
+        // `http://` is not always used when detecting the URL, so we add it if
+        // it doesn't exist and the dev server is up.
         return null === parse_url($viteUrl, PHP_URL_SCHEME)
             ? "http://{$viteUrl}"
             : $viteUrl;

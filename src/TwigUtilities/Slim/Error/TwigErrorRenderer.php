@@ -19,7 +19,8 @@ class TwigErrorRenderer implements ErrorRendererInterface
     public function __construct(
         private Environment $twig,
         /**
-         * Default template used when no template is given for a specific exception.
+         * Default template used when no template is given for a specific
+         * exception.
          */
         private string $defaultTemplate,
         /**

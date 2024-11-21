@@ -14,6 +14,10 @@ abstract class AbstractFunction extends AbstractTwigFunction
 {
     public static function getFunction(): TwigFunction
     {
-        return new TwigFunction(static::getName(), [static::class, "__invoke"], static::getOptions());
+        return new TwigFunction(
+            static::getName(),
+            [static::class, "__invoke"],
+            static::getOptions()
+        );
     }
 }
