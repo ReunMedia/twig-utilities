@@ -1,0 +1,13 @@
+{
+  "src-www/css/style.css": {
+    "file": "assets/style-BAEiFeLX.css",
+    "src": "src-www/css/style.css",
+    "isEntry": true
+  },
+  "src-www/js/main.ts": {
+    "file": "assets/main-AHBLux7V.js",
+    "name": "main",
+    "src": "src-www/js/main.ts",
+    "isEntry": true
+  }
+}

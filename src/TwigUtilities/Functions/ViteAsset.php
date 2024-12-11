@@ -48,9 +48,9 @@ class ViteAsset extends AbstractFunction
     ) {
         // Get Vite dev server URL in dev mode. If the URL is empty, we assume
         // the dev server is not running and fallback to latest static build.
-        if ($isDev) {
-            $this->viteDevServerUrl = $this->getViteDevServerUrl();
-        }
+        $this->viteDevServerUrl = $isDev
+            ? $this->getViteDevServerUrl()
+            : "";
 
         // Load manifest file if Vite dev server is not running.
         if (!(bool) $this->viteDevServerUrl) {
