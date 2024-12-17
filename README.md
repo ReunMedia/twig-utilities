@@ -1,6 +1,6 @@
 # Twig utilities
 
-![PHP Version](https://img.shields.io/packagist/dependency-v/reun/twig-utilities/php)
+[![Supported PHP Version](https://img.shields.io/packagist/dependency-v/reun/twig-utilities/PHP?logo=PHP&logoColor=777BB3&color=777BB3)](https://www.php.net/supported-versions.php)
 [![Packagist Version](https://img.shields.io/packagist/v/reun/twig-utilities)](https://packagist.org/packages/reun/twig-utilities)
 
 Various utility filters, functions and Slim integration for Twig.
