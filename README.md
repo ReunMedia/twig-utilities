@@ -1,5 +1,8 @@
 # Twig utilities
 
+![Packagist Dependency Version](https://img.shields.io/packagist/dependency-v/reun/twig-utilities/php)
+[![Packagist Version](https://img.shields.io/packagist/v/reun/twig-utilities)](https://packagist.org/packages/reun/twig-utilities)
+
 Various utility filters, functions and Slim integration for Twig.
 
 ## Installation
