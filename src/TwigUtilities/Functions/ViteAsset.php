@@ -105,6 +105,20 @@ class ViteAsset extends AbstractFunction
             $result .= $this->createScriptTag($assetUrl);
         }
 
+        // Handle additional CSS files for this chunk in production
+        if (!$this->isDevServerUp()) {
+            $currentAssetManifest = $this->manifest[$assetName] ?? [];
+            assert(is_array($currentAssetManifest));
+
+            $chunkCssAssets = $currentAssetManifest["css"] ?? [];
+            assert(is_array($chunkCssAssets));
+
+            foreach ($chunkCssAssets as $cssUrl) {
+                assert(is_string($cssUrl));
+                $result .= $this->createStyleTag("{$this->staticBasePath}/{$cssUrl}");
+            }
+        }
+
         return $result;
     }
 

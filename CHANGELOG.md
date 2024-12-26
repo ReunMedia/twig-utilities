@@ -5,9 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.14.0] - 2024-12-26
+
+### Added
+
+- **ViteAsset**: You can now use second argument to specify alternative asset to
+  serve when dev server is up. E.g. `viteAsset("prod.css", "dev.css")`.
+- **ViteAsset**: Support Vite's [CSS Code
+  Splitting](https://vite.dev/guide/features.html#css-code-splitting) by
+  injecting `<style>` tags for individual chunks' additional CSS in production.
+
 ## [0.13.0] - 2024-12-19
 
-## Added
+### Added
 
 - Add `TwigNotFoundSlimMiddleware` that can be used to let Slim set correct
   status code (`404`) when Twig template is not found

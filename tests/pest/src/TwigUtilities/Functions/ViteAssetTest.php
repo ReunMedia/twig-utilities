@@ -33,6 +33,20 @@ describe(ViteAsset::class, function () {
         }
     );
 
+    it(
+        "should create additional `<style>` tags for CSS for chunks in production",
+        function () {
+            $viteAsset = new ViteAsset(
+                __DIR__."/../../../fixtures/manifest.json",
+                false
+            );
+
+            expect($viteAsset("src-www/js/main.ts"))
+                ->toContain("main-CXc3meVj.css")
+            ;
+        }
+    );
+
     describe("dev server asset override", function () {
         it(
             "should allow specifying an optional separate asset that is served
