@@ -32,4 +32,45 @@ describe(ViteAsset::class, function () {
             ;
         }
     );
+
+    describe("dev server asset override", function () {
+        it(
+            "should allow specifying an optional separate asset that is served
+            when using dev server",
+            function () {
+                // Fake dev server being up
+                putenv(ViteAsset::VITE_DEV_SERVER_ENV_KEY."=http://localhost:5173");
+
+                $viteAsset = new ViteAsset(
+                    __DIR__."/../../../fixtures/manifest.json",
+                    true,
+                );
+
+                $result = $viteAsset("src-www/css/style.css", "src-www/css/style2.css");
+                expect($result)
+                    ->toContain("src-www/css/style2.css")
+                    ->and($result)->not->toContain("assets/")
+                ;
+            }
+        );
+
+        it("should not be served if dev server is not running", function () {
+            // Fake dev server not being up
+            putenv(ViteAsset::VITE_DEV_SERVER_ENV_KEY."=");
+
+            $viteAsset = new ViteAsset(
+                __DIR__."/../../../fixtures/manifest.json",
+                true,
+            );
+
+            $result = $viteAsset("src-www/css/style.css", "src-www/css/style2.css");
+            expect($result)
+                ->toContain("assets/")
+                ->and($result)->not->toContain("src-www")
+            ;
+        });
+    })->after(function () {
+        // Clean up dev fake dev server ENV variable
+        putenv(ViteAsset::VITE_DEV_SERVER_ENV_KEY);
+    });
 });

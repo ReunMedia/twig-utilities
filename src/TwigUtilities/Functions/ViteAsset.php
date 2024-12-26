@@ -63,10 +63,13 @@ class ViteAsset extends AbstractFunction
     }
 
     /**
-     * @param string $assetName Asset name to get
+     * @param string  $assetName    Asset name to get
+     * @param ?string $devAssetName Alternative asset to get when dev server is
+     *                              up. Defaults to `assetName`.
      */
     public function __invoke(
         string $assetName,
+        ?string $devAssetName = null,
     ): string {
         $result = "";
 
@@ -76,6 +79,10 @@ class ViteAsset extends AbstractFunction
                 "@vite/client",
             ));
             $this->clientInjected = true;
+        }
+
+        if ($this->isDevServerUp() && null !== $devAssetName) {
+            $assetName = $devAssetName;
         }
 
         // Get static asset URL from manifest or a URL relative to dev server.
@@ -143,6 +150,11 @@ class ViteAsset extends AbstractFunction
         $file = $manifest["file"];
 
         return "{$this->staticBasePath}/{$file}";
+    }
+
+    private function isDevServerUp(): bool
+    {
+        return (bool) $this->viteDevServerUrl;
     }
 
     private function getViteDevServerUrl(): string
