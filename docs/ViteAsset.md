@@ -124,6 +124,6 @@ $c[Vite::class] = function (AppConfig $appConfig) {
         // the frontend is built
         : "http://caddy:80/static/dist/.vite/manifest.json";
 
-    return new Vite($manifestFile, $appConfig->isDev());
+    return new ViteAsset($manifestFile, $appConfig->isDev());
 };
 ```
