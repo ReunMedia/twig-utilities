@@ -4,7 +4,7 @@
  * @author Kimmo Salmela <kimmo.salmela@reun.eu>
  * @copyright 2021 Reun Media
  *
- * @see https://github.com/Reun-Media/project-templates/blob/master/base/app/vite.config.ts
+ * @see https://github.com/ReunMedia/project-templates/blob/master/base/app/vite.config.ts
  *
  * @version 1.0.0
  */
